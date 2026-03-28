@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Sora } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-});
-
-const sora = Sora({
-  variable: "--font-sora",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -33,11 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${instrumentSerif.variable} ${sora.variable} antialiased`}
-    >
-      <body className="grain bg-white text-black">{children}</body>
+    <html lang="en" className={`${montserrat.variable} antialiased`}>
+      <body className="bg-white text-[#1d1d1f]">{children}</body>
     </html>
   );
 }

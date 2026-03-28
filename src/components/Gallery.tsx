@@ -7,53 +7,16 @@ interface Photo {
   src: string;
   alt: string;
   label: string;
-  caption: string;
   wide: boolean;
 }
 
 const photos: Photo[] = [
-  {
-    src: "/images/flow/zoom-prayer.jpg",
-    alt: "Global Prayer — thousands of believers connected on Zoom",
-    label: "Global",
-    caption: "Believers connected worldwide",
-    wide: true,
-  },
-  {
-    src: "/images/flow/prayer-is-the-work.jpg",
-    alt: "Dag Heward-Mills — Prayer Is The Work",
-    label: "S12 · E13",
-    caption: "Prayer is the work",
-    wide: false,
-  },
-  {
-    src: "/images/flow/worship-hands.jpg",
-    alt: "Lifted hands in worship",
-    label: "S12 · E14",
-    caption: "Lifted in worship",
-    wide: false,
-  },
-  {
-    src: "/images/flow/flow-shirt.jpg",
-    alt: "Flexible Lovers Of The Word",
-    label: "S12 · E15",
-    caption: "Flexible Lovers Of The Word",
-    wide: false,
-  },
-  {
-    src: "/images/flow/singers.jpg",
-    alt: "FLOW worship singers",
-    label: "S12 · E15",
-    caption: "Voices lifted together",
-    wide: false,
-  },
-  {
-    src: "/images/flow/worship-team.jpg",
-    alt: "FLOW worship team with the cross",
-    label: "S12 · E7",
-    caption: "Worship in unity",
-    wide: true,
-  },
+  { src: "/images/flow/zoom-prayer.jpg", alt: "Global prayer on Zoom", label: "Global", wide: true },
+  { src: "/images/flow/prayer-is-the-work.jpg", alt: "Prayer Is The Work", label: "S12 E13", wide: false },
+  { src: "/images/flow/worship-hands.jpg", alt: "Worship", label: "S12 E14", wide: false },
+  { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", label: "S12 E15", wide: false },
+  { src: "/images/flow/singers.jpg", alt: "FLOW singers", label: "S12 E15", wide: false },
+  { src: "/images/flow/worship-team.jpg", alt: "Worship team", label: "S12 E7", wide: true },
 ];
 
 function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
@@ -77,32 +40,27 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
   }, []);
 
   return (
-    <div ref={ref} className={`${photo.wide ? "col-span-1 md:col-span-2" : "col-span-1"}`}>
+    <div ref={ref} className={photo.wide ? "col-span-1 md:col-span-2" : "col-span-1"}>
       <div
-        className="relative overflow-hidden rounded-[20px] group cursor-pointer"
+        className="relative overflow-hidden rounded-[20px] group"
         style={{
           aspectRatio: photo.wide ? "2/1" : "3/4",
-          clipPath: visible
-            ? "circle(150% at 50% 50%)"
-            : "circle(0% at 50% 50%)",
-          transition: `clip-path 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s`,
+          clipPath: visible ? "circle(150% at 50% 50%)" : "circle(0% at 50% 50%)",
+          transition: `clip-path 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) ${index * 0.08}s`,
         }}
       >
         <Image
           src={photo.src}
           alt={photo.alt}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes={photo.wide ? "(max-width: 768px) 100vw, 80vw" : "(max-width: 768px) 50vw, 33vw"}
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          sizes={photo.wide ? "(max-width: 768px) 100vw, 80vw" : "(max-width: 768px) 50vw, 40vw"}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute bottom-5 left-5 md:bottom-6 md:left-6">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/70">
             {photo.label}
           </span>
-          <p className="text-white font-medium mt-1.5 text-sm md:text-base">
-            {photo.caption}
-          </p>
         </div>
       </div>
     </div>
@@ -130,24 +88,18 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="gallery" className="py-32 md:py-48 bg-white">
-      <div className="max-w-6xl mx-auto px-8 md:px-12">
-        <div
-          ref={ref}
-          className={`reveal ${visible ? "visible" : ""} text-center mb-16`}
-        >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold mb-4">
+    <section id="gallery" className="py-28 md:py-40">
+      <div className="max-w-[980px] mx-auto px-6">
+        <div ref={ref} className={`reveal ${visible ? "visible" : ""} text-center mb-14`}>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-accent mb-3">
             Gallery
           </p>
-          <h2
-            className="text-4xl md:text-6xl tracking-[-0.02em]"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            <span className="italic">Moments of Power</span>
+          <h2 className="text-[40px] md:text-[56px] font-bold leading-[1.05] tracking-[-0.03em] text-[#1d1d1f]">
+            Moments of power.
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 gap-3 md:gap-4">
           {photos.map((photo, i) => (
             <GalleryItem key={photo.src} photo={photo} index={i} />
           ))}
