@@ -21,28 +21,21 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Circle mask: starts at 5%, grows to 75% (covers viewport)
   const clipSize = 5 + progress * 70;
-  // Text fades out as photo reveals
   const textOpacity = Math.max(0, 1 - progress * 2.5);
-  // Subtle scale on text
-  const textScale = 1 + progress * 0.08;
-  // Overlay darkens as circle grows
-  const overlayOpacity = 0.1 + progress * 0.3;
+  const overlayOpacity = 0.15 + progress * 0.35;
 
   return (
     <section ref={sectionRef} style={{ height: "180vh" }}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-white">
-        {/* Photo reveal with circle mask */}
+        {/* Photo circle mask reveal */}
         <div
           className="absolute inset-0 z-0"
-          style={{
-            clipPath: `circle(${clipSize}% at 50% 50%)`,
-          }}
+          style={{ clipPath: `circle(${clipSize}% at 50% 50%)` }}
         >
           <Image
             src="/images/flow/podium-prayer.jpg"
-            alt="FLOW Prayer Meeting — powerful prayer at the podium"
+            alt="FLOW Prayer Meeting"
             fill
             className="object-cover"
             sizes="100vw"
@@ -54,48 +47,60 @@ export default function Hero() {
           />
         </div>
 
-        {/* Text content — fades out as photo circle grows */}
+        {/* Hero text — centered, fades as photo reveals */}
         <div
-          className="relative z-10 text-center px-6 max-w-4xl"
-          style={{
-            opacity: textOpacity,
-            transform: `scale(${textScale})`,
-          }}
+          className="relative z-10 text-center px-8 w-full max-w-5xl mx-auto"
+          style={{ opacity: textOpacity }}
         >
-          <div className="mb-6">
-            <Image
-              src="/images/flow/logo.png"
-              alt="Flow"
-              width={60}
-              height={60}
-              className="mx-auto rounded-xl"
-            />
-          </div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gray-400 mb-5">
+          {/* flow. wordmark */}
+          <p
+            className="text-2xl md:text-3xl font-bold tracking-[-0.02em] mb-10"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            flow<span className="text-gold">.</span>
+          </p>
+
+          {/* Subtitle */}
+          <p className="text-[11px] md:text-[12px] font-medium uppercase tracking-[0.4em] text-gray-400 mb-8">
             Online Prophetic Prayers
           </p>
-          <h1 className="text-[clamp(3.5rem,11vw,9rem)] font-black leading-[0.85] tracking-tight text-black">
-            THERE&apos;S
+
+          {/* Main heading — Instrument Serif italic */}
+          <h1
+            className="text-[clamp(3rem,9vw,7.5rem)] leading-[0.92] tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            <span className="italic">There&apos;s</span>
             <br />
-            <span className="gold-text">POWER</span>
+            <span className="italic gold-text">Power</span>
             <br />
-            HERE
+            <span className="italic">Here</span>
           </h1>
-          <p className="text-base md:text-lg text-gray-400 mt-6 max-w-md mx-auto leading-relaxed">
+
+          {/* Tagline */}
+          <p className="text-gray-400 text-base md:text-lg mt-8 max-w-sm mx-auto leading-relaxed">
             Join millions of believers worldwide in prophetic prayer
           </p>
+
+          {/* Schedule pill */}
+          <div className="mt-8 inline-flex items-center gap-3 border border-gray-200 rounded-full px-5 py-2.5">
+            <div className="w-2 h-2 rounded-full bg-gold live-pulse" />
+            <span className="text-[12px] font-medium text-gray-500 tracking-wide">
+              Tuesdays &amp; Fridays · 4:30 AM GMT
+            </span>
+          </div>
         </div>
 
         {/* Scroll indicator */}
         <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3"
           style={{ opacity: Math.max(0, 1 - progress * 6) }}
         >
-          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-medium">
+          <span className="text-[10px] uppercase tracking-[0.25em] text-gray-300 font-medium">
             Scroll
           </span>
-          <div className="w-5 h-8 border-[1.5px] border-gray-300 rounded-full flex justify-center pt-1.5">
-            <div className="w-1 h-1.5 bg-gray-400 rounded-full scroll-bounce" />
+          <div className="w-[18px] h-7 border border-gray-300 rounded-full flex justify-center pt-1">
+            <div className="w-[3px] h-[6px] bg-gray-300 rounded-full scroll-bounce" />
           </div>
         </div>
       </div>

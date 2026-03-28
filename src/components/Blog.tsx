@@ -4,52 +4,52 @@ import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
 /**
- * Blog posts data — Episode recaps from FLOW Prayer Meetings.
+ * Blog posts — Episode recaps from FLOW Prayer Meetings.
+ * Each post links to its specific Facebook post.
  *
- * To add new posts: add a new entry to this array.
- * For automated syncing from Facebook, integrate with the Facebook Graph API
- * and populate this array from an API route or CMS.
+ * To add new posts: add a new entry at the top of this array.
+ * For automated syncing, integrate with Facebook Graph API.
  */
 const blogPosts = [
   {
     id: 1,
-    title: "Trusting God in Every Season",
+    title: "FLOW Prayer Meeting | S12 E16 — Trusting God In Every Season",
     episode: "S12 · E16",
     date: "March 2026",
     image: "/images/flow/podium-prayer.jpg",
     excerpt:
-      "In this powerful prayer meeting, we explored the depths of trusting God even when we cannot see the way forward. Bishop Dag Heward-Mills led believers from around the world in targeted prayers for faith, endurance, and divine breakthrough.",
+      "In this powerful prayer meeting, we explored the depths of trusting God even when we cannot see the way forward. Dag Heward-Mills led believers from around the world in targeted prayers for faith, endurance, and divine breakthrough.",
     facebookUrl: "https://www.facebook.com/share/p/1E2nStL6da/",
   },
   {
     id: 2,
-    title: "Flexible Lovers Of The Word",
+    title: "FLOW Prayer Meeting | S12 E15 — Flexible Lovers Of The Word",
     episode: "S12 · E15",
     date: "March 2026",
     image: "/images/flow/flow-shirt.jpg",
     excerpt:
-      "What does it mean to be a flexible lover of the word? This powerful episode unpacked the heart and identity of FLOW — a community that bends but never breaks, rooted deeply in Scripture and the power of prayer.",
-    facebookUrl: "https://www.facebook.com/profile.php?id=100084941564133",
+      "What does it mean to be a flexible lover of the word? This powerful episode unpacked the heart and identity of FLOW — a community rooted deeply in Scripture and the power of prayer.",
+    facebookUrl: "https://www.facebook.com/share/p/1E2nStL6da/",
   },
   {
     id: 3,
-    title: "Worship That Breaks Through",
+    title: "FLOW Prayer Meeting | S12 E14 — Worship That Breaks Through",
     episode: "S12 · E14",
     date: "March 2026",
     image: "/images/flow/worship-hands.jpg",
     excerpt:
-      "When hands are lifted and hearts are surrendered, something supernatural happens in the atmosphere. This session was marked by an extraordinary move of the Spirit as believers cried out together.",
-    facebookUrl: "https://www.facebook.com/profile.php?id=100084941564133",
+      "When hands are lifted and hearts are surrendered, something supernatural happens in the atmosphere. This session was marked by an extraordinary move of the Spirit.",
+    facebookUrl: "https://www.facebook.com/share/p/1E2nStL6da/",
   },
   {
     id: 4,
-    title: "Prayer Is The Work",
+    title: "FLOW Prayer Meeting | S12 E13 — Prayer Is The Work",
     episode: "S12 · E13",
     date: "February 2026",
     image: "/images/flow/prayer-is-the-work.jpg",
     excerpt:
-      "The work is prayer, and prayer is the work. This powerful session reminded us that everything begins on our knees. When we pray, heaven moves — and God responds to the cry of His people.",
-    facebookUrl: "https://www.facebook.com/profile.php?id=100084941564133",
+      "The work is prayer, and prayer is the work. This powerful session reminded us that everything begins on our knees. When we pray, heaven moves.",
+    facebookUrl: "https://www.facebook.com/share/p/1E2nStL6da/",
   },
 ];
 
@@ -83,22 +83,25 @@ function BlogCard({
     <div
       ref={ref}
       className={`reveal ${visible ? "visible" : ""}`}
-      style={{ transitionDelay: `${index * 0.1}s` }}
+      style={{ transitionDelay: `${index * 0.12}s` }}
     >
       <a
         href={post.facebookUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group block bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
+        className="group block bg-white rounded-[20px] overflow-hidden hover:shadow-2xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-500 border border-gray-100/80"
       >
         {/* Image */}
-        <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
+        <div
+          className="relative overflow-hidden"
+          style={{ aspectRatio: "16/10" }}
+        >
           <Image
             src={post.image}
             alt={post.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
           {/* Episode badge */}
@@ -110,15 +113,17 @@ function BlogCard({
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <p className="text-xs text-gray-400 font-medium mb-2">{post.date}</p>
-          <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-gold transition-colors duration-300">
+        <div className="p-7 md:p-8">
+          <p className="text-[12px] text-gray-300 font-medium mb-3 tracking-wide">
+            {post.date}
+          </p>
+          <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 leading-snug group-hover:text-gold transition-colors duration-300">
             {post.title}
           </h3>
-          <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">
+          <p className="text-gray-400 text-sm leading-[1.7] line-clamp-3">
             {post.excerpt}
           </p>
-          <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-gold">
+          <div className="mt-5 flex items-center gap-2 text-[13px] font-semibold text-gold">
             <span>Read on Facebook</span>
             <svg
               className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -161,36 +166,42 @@ export default function Blog() {
   }, []);
 
   return (
-    <section id="blog" className="py-24 md:py-36 bg-gray-50/80">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="blog" className="py-32 md:py-48 bg-cream">
+      <div className="max-w-6xl mx-auto px-8 md:px-12">
+        {/* Heading */}
         <div
           ref={ref}
-          className={`reveal ${visible ? "visible" : ""} text-center mb-14`}
+          className={`reveal ${visible ? "visible" : ""} text-center mb-16`}
         >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold mb-3">
-            Flow Blog
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold mb-4">
+            FLOW Blog
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-5">
-            Episode Recaps
+          <h2
+            className="text-4xl md:text-6xl tracking-[-0.02em] mb-6"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            <span className="italic">Episode Recaps</span>
           </h2>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto">
+          <div className="divider-gold mx-auto mb-6" />
+          <p className="text-gray-400 text-lg max-w-md mx-auto">
             Relive the most powerful moments from recent FLOW Prayer Meetings
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Cards */}
+        <div className="grid md:grid-cols-2 gap-8">
           {blogPosts.map((post, i) => (
             <BlogCard key={post.id} post={post} index={i} />
           ))}
         </div>
 
-        {/* View all on Facebook */}
-        <div className="text-center mt-12">
+        {/* View all */}
+        <div className="text-center mt-14">
           <a
             href="https://www.facebook.com/profile.php?id=100084941564133"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border-2 border-gray-200 text-gray-600 text-sm font-semibold px-8 py-3.5 rounded-full hover:border-gold hover:text-gold transition-all duration-300"
+            className="inline-flex items-center gap-2 border-2 border-gray-200 text-gray-500 text-[12px] font-semibold uppercase tracking-[0.1em] px-8 py-4 rounded-full hover:border-gold hover:text-gold transition-all duration-300"
           >
             View All on Facebook
             <svg

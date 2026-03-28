@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,40 +12,43 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const links = [
+    { label: "About", href: "#about" },
+    { label: "Schedule", href: "#schedule" },
+    { label: "Gallery", href: "#gallery" },
+    { label: "Watch", href: "#connect" },
+    { label: "Blog", href: "#blog" },
+  ];
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.05)]"
+          ? "bg-white/95 backdrop-blur-lg border-b border-black/[0.04]"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
-          <Image
-            src="/images/flow/logo.png"
-            alt="Flow"
-            width={36}
-            height={36}
-            className="rounded-lg"
-          />
+      <div className="max-w-7xl mx-auto px-8 md:px-12 h-20 flex items-center justify-between">
+        {/* flow. wordmark */}
+        <a
+          href="#"
+          className="text-[1.4rem] font-bold tracking-[-0.02em]"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          flow<span className="text-gold">.</span>
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-500">
-          <a href="#about" className="hover:text-black transition-colors">
-            About
-          </a>
-          <a href="#schedule" className="hover:text-black transition-colors">
-            Schedule
-          </a>
-          <a href="#gallery" className="hover:text-black transition-colors">
-            Gallery
-          </a>
-          <a href="#blog" className="hover:text-black transition-colors">
-            Blog
-          </a>
+        <div className="hidden md:flex items-center gap-10">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[12px] font-medium uppercase tracking-[0.18em] text-gray-400 hover:text-black transition-colors duration-300"
+            >
+              {l.label}
+            </a>
+          ))}
         </div>
 
         {/* CTA */}
@@ -54,30 +56,30 @@ export default function Navbar() {
           href="https://www.youtube.com/@TheresPowerHere"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-gray-800 transition-colors"
+          className="hidden md:inline-flex items-center gap-2 bg-black text-white text-[12px] font-semibold uppercase tracking-[0.1em] px-6 py-3 rounded-full hover:bg-gold hover:text-black transition-all duration-300"
         >
-          Join Prayer
+          Watch Live
         </a>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-[5px] p-2"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
           <span
-            className={`w-5 h-0.5 bg-black transition-all duration-300 ${
-              menuOpen ? "rotate-45 translate-y-2" : ""
+            className={`w-5 h-[1.5px] bg-black transition-all duration-300 origin-center ${
+              menuOpen ? "rotate-45 translate-y-[6.5px]" : ""
             }`}
           />
           <span
-            className={`w-5 h-0.5 bg-black transition-all duration-300 ${
+            className={`w-5 h-[1.5px] bg-black transition-all duration-300 ${
               menuOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`w-5 h-0.5 bg-black transition-all duration-300 ${
-              menuOpen ? "-rotate-45 -translate-y-2" : ""
+            className={`w-5 h-[1.5px] bg-black transition-all duration-300 origin-center ${
+              menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
             }`}
           />
         </button>
@@ -85,46 +87,28 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-white border-t border-gray-100 transition-all duration-300 overflow-hidden ${
-          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden bg-white transition-all duration-400 overflow-hidden ${
+          menuOpen ? "max-h-[400px] opacity-100 border-t border-gray-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-6 py-4 flex flex-col gap-4">
-          <a
-            href="#about"
-            className="text-gray-600 font-medium py-2"
-            onClick={() => setMenuOpen(false)}
-          >
-            About
-          </a>
-          <a
-            href="#schedule"
-            className="text-gray-600 font-medium py-2"
-            onClick={() => setMenuOpen(false)}
-          >
-            Schedule
-          </a>
-          <a
-            href="#gallery"
-            className="text-gray-600 font-medium py-2"
-            onClick={() => setMenuOpen(false)}
-          >
-            Gallery
-          </a>
-          <a
-            href="#blog"
-            className="text-gray-600 font-medium py-2"
-            onClick={() => setMenuOpen(false)}
-          >
-            Blog
-          </a>
+        <div className="px-8 py-6 flex flex-col gap-1">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-gray-500 font-medium py-3 text-[15px] hover:text-black transition-colors"
+              onClick={() => setMenuOpen(false)}
+            >
+              {l.label}
+            </a>
+          ))}
           <a
             href="https://www.youtube.com/@TheresPowerHere"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-black text-white text-sm font-semibold px-5 py-3 rounded-full text-center"
+            className="mt-4 bg-black text-white text-[13px] font-semibold px-6 py-3.5 rounded-full text-center"
           >
-            Join Prayer
+            Watch Live
           </a>
         </div>
       </div>

@@ -14,7 +14,7 @@ interface Photo {
 const photos: Photo[] = [
   {
     src: "/images/flow/zoom-prayer.jpg",
-    alt: "Global Prayer on Zoom — thousands of believers connected",
+    alt: "Global Prayer — thousands of believers connected on Zoom",
     label: "Global",
     caption: "Believers connected worldwide",
     wide: true,
@@ -35,7 +35,7 @@ const photos: Photo[] = [
   },
   {
     src: "/images/flow/flow-shirt.jpg",
-    alt: "Flexible Lovers Of The Word t-shirt",
+    alt: "Flexible Lovers Of The Word",
     label: "S12 · E15",
     caption: "Flexible Lovers Of The Word",
     wide: false,
@@ -70,22 +70,22 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
           obs.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <div ref={ref} className={photo.wide ? "col-span-2" : ""}>
+    <div ref={ref} className={`${photo.wide ? "col-span-1 md:col-span-2" : "col-span-1"}`}>
       <div
-        className="relative overflow-hidden rounded-2xl group cursor-pointer"
+        className="relative overflow-hidden rounded-[20px] group cursor-pointer"
         style={{
-          aspectRatio: photo.wide ? "16/9" : "3/4",
+          aspectRatio: photo.wide ? "2/1" : "3/4",
           clipPath: visible
             ? "circle(150% at 50% 50%)"
             : "circle(0% at 50% 50%)",
-          transition: `clip-path 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.12}s`,
+          transition: `clip-path 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s`,
         }}
       >
         <Image
@@ -93,14 +93,14 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
           alt={photo.alt}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes={photo.wide ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+          sizes={photo.wide ? "(max-width: 768px) 100vw, 80vw" : "(max-width: 768px) 50vw, 33vw"}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold">
             {photo.label}
           </span>
-          <p className="text-white font-semibold mt-1 text-sm md:text-base">
+          <p className="text-white font-medium mt-1.5 text-sm md:text-base">
             {photo.caption}
           </p>
         </div>
@@ -130,21 +130,24 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="gallery" className="py-24 md:py-36 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="gallery" className="py-32 md:py-48 bg-white">
+      <div className="max-w-6xl mx-auto px-8 md:px-12">
         <div
           ref={ref}
-          className={`reveal ${visible ? "visible" : ""} text-center mb-14`}
+          className={`reveal ${visible ? "visible" : ""} text-center mb-16`}
         >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold mb-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold mb-4">
             Gallery
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Moments of Power
+          <h2
+            className="text-4xl md:text-6xl tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            <span className="italic">Moments of Power</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 gap-4 md:gap-6">
           {photos.map((photo, i) => (
             <GalleryItem key={photo.src} photo={photo} index={i} />
           ))}
