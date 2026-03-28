@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
+import Banner from "@/components/Banner";
 import Hero from "@/components/Hero";
+import PhotoReveal from "@/components/PhotoReveal";
 import About from "@/components/About";
 import Schedule from "@/components/Schedule";
 import Gallery from "@/components/Gallery";
@@ -12,7 +14,9 @@ export default function Home() {
     <>
       <Navbar />
       <main>
+        <Banner />
         <Hero />
+        <PhotoReveal />
         <About />
         <Schedule />
         <Gallery />

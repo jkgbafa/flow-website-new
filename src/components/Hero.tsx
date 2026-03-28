@@ -1,71 +1,58 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
-export default function Hero() {
-  const [progress, setProgress] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-
+function useInView(threshold = 0.2) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const onScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const h = sectionRef.current.offsetHeight - window.innerHeight;
-      if (h <= 0) return;
-      setProgress(Math.max(0, Math.min(1, -rect.top / h)));
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, visible };
+}
 
-  const clipSize = 5 + progress * 70;
-  const textOpacity = Math.max(0, 1 - progress * 2.5);
+export default function Hero() {
+  const { ref, visible } = useInView(0.3);
 
   return (
-    <section ref={sectionRef} style={{ height: "180vh" }}>
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-white">
-        {/* Photo circle reveal */}
-        <div
-          className="absolute inset-0"
-          style={{ clipPath: `circle(${clipSize}% at 50% 50%)` }}
-        >
-          <Image
-            src="/images/flow/podium-prayer.jpg"
-            alt="FLOW Prayer Meeting"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: `rgba(0,0,0,${0.15 + progress * 0.3})` }}
-          />
-        </div>
-
-        {/* Content */}
-        <div
-          className="relative z-10 text-center px-6 w-full max-w-[680px] mx-auto"
-          style={{ opacity: textOpacity }}
-        >
+    <section className="py-24 md:py-32 text-center">
+      <div ref={ref} className="max-w-[680px] mx-auto px-6">
+        <div className={`reveal ${visible ? "visible" : ""}`}>
           <Image
             src="/images/flow/flow-logo-black.png"
             alt="FLOW"
             width={100}
             height={40}
-            className="mx-auto mb-12 object-contain"
+            className="mx-auto mb-10 object-contain"
           />
+        </div>
 
+        <div className={`reveal ${visible ? "visible" : ""} delay-1`}>
           <h1 className="text-[48px] md:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-[#1d1d1f]">
             There&apos;s Power Here.
           </h1>
+        </div>
 
-          <p className="text-[17px] md:text-[21px] text-[#86868b] mt-6 leading-[1.5] font-normal max-w-[460px] mx-auto">
+        <div className={`reveal ${visible ? "visible" : ""} delay-2`}>
+          <p className="text-[17px] md:text-[21px] text-[#86868b] mt-6 leading-[1.5] max-w-[460px] mx-auto">
             Online prophetic prayer meetings. Join millions of believers worldwide.
           </p>
+        </div>
 
+        <div className={`reveal ${visible ? "visible" : ""} delay-3`}>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="https://www.youtube.com/@TheresPowerHere"
@@ -82,16 +69,6 @@ export default function Hero() {
             >
               View schedule &rsaquo;
             </a>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-          style={{ opacity: Math.max(0, 1 - progress * 6) }}
-        >
-          <div className="w-[22px] h-[34px] border-2 border-[#d2d2d7] rounded-full flex justify-center pt-1.5">
-            <div className="w-[3px] h-[6px] bg-[#86868b] rounded-full scroll-bounce" />
           </div>
         </div>
       </div>
