@@ -30,8 +30,22 @@ export default function ShareLink() {
       <div className="absolute inset-0 dot-texture" />
 
       <div ref={ref} className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`reveal ${visible ? "visible" : ""} grid md:grid-cols-2 gap-12 lg:gap-16 items-center`}>
-          {/* Video */}
+        <div className={`reveal ${visible ? "visible" : ""}`}>
+          {/* Text header */}
+          <div className="text-center mb-10">
+            <p className="text-accent text-[11px] font-semibold tracking-[0.15em] uppercase mb-4">
+              Spread The Word
+            </p>
+            <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
+              Share The FLOW Link
+            </h2>
+            <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
+            <p className="text-white/50 text-lg mt-6 max-w-lg mx-auto leading-relaxed">
+              Help others experience the power of prayer. Share the FLOW link with your friends, family, and community.
+            </p>
+          </div>
+
+          {/* Video — full width 16:9 */}
           <div className="relative rounded-2xl overflow-hidden border border-white/10">
             <video
               ref={videoRef}
@@ -40,30 +54,18 @@ export default function ShareLink() {
               loop
               playsInline
               className="w-full"
-              style={{ aspectRatio: "9/16", objectFit: "cover" }}
+              style={{ aspectRatio: "16/9", objectFit: "cover" }}
             />
           </div>
 
-          {/* Text */}
-          <div className={`reveal ${visible ? "visible" : ""} delay-2`}>
-            <p className="text-accent text-[11px] font-semibold tracking-[0.15em] uppercase mb-4">
-              Spread The Word
+          {/* Share link box */}
+          <div className="mt-8 max-w-md mx-auto glass rounded-2xl p-5 text-center">
+            <p className="text-[11px] text-white/30 uppercase tracking-wider font-medium mb-2">
+              Share this link
             </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-              Share The<br />FLOW Link
-            </h2>
-            <div className="mt-6 h-1 w-32 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
-            <p className="text-white/50 text-lg mt-6 leading-relaxed">
-              Help others experience the power of prayer. Share the FLOW link with your friends, family, and community so they can join the prayer meetings.
+            <p className="text-white font-semibold select-all">
+              youtube.com/@TheresPowerHere
             </p>
-            <div className="mt-8 glass rounded-2xl p-5">
-              <p className="text-[11px] text-white/30 uppercase tracking-wider font-medium mb-2">
-                Share this link
-              </p>
-              <p className="text-white font-semibold select-all">
-                youtube.com/@TheresPowerHere
-              </p>
-            </div>
           </div>
         </div>
       </div>

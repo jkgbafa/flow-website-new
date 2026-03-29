@@ -95,9 +95,21 @@ export const socialLinks = [
   {
     label: "Odysee",
     href: "https://odysee.com/@FlowChurchServices:6",
-    icon: <OdyseeIcon className="w-4 h-4" gradientId="og-nav" />,
+    icon: (
+      <svg viewBox="0 0 274 272" className="w-4 h-4">
+        <defs>
+          <mask id="om">
+            <rect x="2" y="0" width="271.31" height="271.31" rx="135.64" fill="white" />
+            <g transform="matrix(2.633,0,0,2.633,-20.24,-21.14)">
+              <path fill="black" d={ODYSEE_CREATURE} />
+            </g>
+          </mask>
+        </defs>
+        <rect fill="currentColor" x="2" y="0" width="271.31" height="271.31" rx="135.64" mask="url(#om)" />
+      </svg>
+    ),
     iconLg: <OdyseeIcon className="w-5 h-5" gradientId="og-footer" />,
-    hoverColor: "hover:opacity-80",
+    hoverColor: "hover:text-white",
     bgColor: "bg-gradient-to-br from-[#ef1970] via-[#f77d35] to-[#ffd600] hover:opacity-90",
   },
 ];

@@ -5,6 +5,7 @@ import { useRef, useEffect, useState } from "react";
 const meetings = [
   {
     day: "Wednesdays",
+    time: "5:00 PM GMT",
     name: "Holy Spirit Meetings",
     description: "Encounter the Holy Spirit through prayer and worship.",
     icon: (
@@ -16,6 +17,7 @@ const meetings = [
   },
   {
     day: "Fridays",
+    time: "5:00 PM GMT",
     name: "Deliverance & Healing Meetings",
     description: "Healing, deliverance, freedom, and restoration through prayer.",
     icon: (
@@ -67,8 +69,11 @@ export default function PastoralCare() {
               <div className="mx-auto w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mb-5">
                 {m.icon}
               </div>
-              <span className="inline-block text-accent text-[12px] font-semibold tracking-widest uppercase mb-3">
+              <span className="inline-block text-accent text-[12px] font-semibold tracking-widest uppercase mb-1">
                 {m.day}
+              </span>
+              <span className="block text-white/60 text-sm font-medium mb-3">
+                {m.time}
               </span>
               <h3 className="text-xl font-semibold text-white mb-3">{m.name}</h3>
               <p className="text-sm text-white/40 leading-relaxed">{m.description}</p>
