@@ -33,59 +33,67 @@ export default function ChatWidget() {
     async (tkn: string) => {
       if (renderedRef.current || !chatRef.current) return;
 
-      const w = window as unknown as Record<string, unknown>;
-      if (!w.WebChat) {
-        await new Promise<void>((resolve) => {
-          const script = document.createElement("script");
-          script.src =
-            "https://cdn.botframework.com/botframework-webchat/latest/webchat.js";
-          script.onload = () => resolve();
-          document.head.appendChild(script);
-        });
-      }
+      try {
+        const w = window as unknown as Record<string, unknown>;
+        if (!w.WebChat) {
+          await new Promise<void>((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src =
+              "https://cdn.botframework.com/botframework-webchat/latest/webchat.js";
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error("Failed to load Web Chat"));
+            document.head.appendChild(script);
+          });
+        }
 
-      const WebChat = w.WebChat as {
-        createDirectLine: (opts: { token: string }) => unknown;
-        renderWebChat: (
-          opts: Record<string, unknown>,
-          el: HTMLDivElement
-        ) => void;
-      };
+        const WebChat = w.WebChat as {
+          createDirectLine: (opts: { token: string }) => unknown;
+          renderWebChat: (
+            opts: Record<string, unknown>,
+            el: HTMLDivElement
+          ) => void;
+        };
 
-      const directLine = WebChat.createDirectLine({ token: tkn });
+        if (!WebChat) throw new Error("WebChat not available");
 
-      WebChat.renderWebChat(
-        {
-          directLine,
-          styleOptions: {
-            backgroundColor: "rgba(0,0,0,0.95)",
-            bubbleBackground: "rgba(255,255,255,0.08)",
-            bubbleBorderColor: "rgba(255,255,255,0.1)",
-            bubbleBorderRadius: 16,
-            bubbleTextColor: "#ffffff",
-            bubbleFromUserBackground: "#E2231A",
-            bubbleFromUserBorderColor: "#E2231A",
-            bubbleFromUserBorderRadius: 16,
-            bubbleFromUserTextColor: "#ffffff",
-            sendBoxBackground: "rgba(255,255,255,0.05)",
-            sendBoxTextColor: "#ffffff",
-            sendBoxBorderTop: "1px solid rgba(255,255,255,0.1)",
-            sendBoxButtonColor: "#E2231A",
-            sendBoxButtonColorOnHover: "#FF4D45",
-            sendBoxPlaceholderColor: "rgba(255,255,255,0.3)",
-            rootHeight: "100%",
-            rootWidth: "100%",
-            hideUploadButton: true,
-            suggestedActionBackground: "rgba(226,35,26,0.15)",
-            suggestedActionBorderColor: "#E2231A",
-            suggestedActionTextColor: "#E2231A",
+        const directLine = WebChat.createDirectLine({ token: tkn });
+
+        WebChat.renderWebChat(
+          {
+            directLine,
+            styleOptions: {
+              backgroundColor: "rgba(0,0,0,0.95)",
+              bubbleBackground: "rgba(255,255,255,0.08)",
+              bubbleBorderColor: "rgba(255,255,255,0.1)",
+              bubbleBorderRadius: 16,
+              bubbleTextColor: "#ffffff",
+              bubbleFromUserBackground: "#E2231A",
+              bubbleFromUserBorderColor: "#E2231A",
+              bubbleFromUserBorderRadius: 16,
+              bubbleFromUserTextColor: "#ffffff",
+              sendBoxBackground: "rgba(255,255,255,0.05)",
+              sendBoxTextColor: "#ffffff",
+              sendBoxBorderTop: "1px solid rgba(255,255,255,0.1)",
+              sendBoxButtonColor: "#E2231A",
+              sendBoxButtonColorOnHover: "#FF4D45",
+              sendBoxPlaceholderColor: "rgba(255,255,255,0.3)",
+              rootHeight: "100%",
+              rootWidth: "100%",
+              hideUploadButton: true,
+              suggestedActionBackground: "rgba(226,35,26,0.15)",
+              suggestedActionBorderColor: "#E2231A",
+              suggestedActionTextColor: "#E2231A",
+            },
           },
-        },
-        chatRef.current
-      );
+          chatRef.current!
+        );
 
-      renderedRef.current = true;
-      setLoading(false);
+        renderedRef.current = true;
+        setLoading(false);
+      } catch {
+        setError(true);
+        setLoading(false);
+      }
     },
     []
   );

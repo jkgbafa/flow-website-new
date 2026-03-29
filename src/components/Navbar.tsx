@@ -7,9 +7,9 @@ import { socialLinks } from "@/lib/socials";
 const navLinks = [
   { label: "ABOUT", href: "#about" },
   { label: "SCHEDULE", href: "#schedule" },
-  { label: "GALLERY", href: "#gallery" },
   { label: "WATCH", href: "#connect" },
-  { label: "BLOG", href: "#blog" },
+  { label: "GIVE", href: "#give" },
+  { label: "CONNECT", href: "#stay-connected" },
 ];
 
 export default function Navbar() {

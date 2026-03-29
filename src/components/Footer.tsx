@@ -97,9 +97,10 @@ export default function Footer() {
                 {[
                   { label: "About FLOW", href: "#about" },
                   { label: "Schedule", href: "#schedule" },
-                  { label: "Gallery", href: "#gallery" },
                   { label: "Watch", href: "#connect" },
-                  { label: "Blog", href: "#blog" },
+                  { label: "Give", href: "#give" },
+                  { label: "Pastoral Care", href: "#pastoral-care" },
+                  { label: "Stay Connected", href: "#stay-connected" },
                 ].map((link) => (
                   <a
                     key={link.label}

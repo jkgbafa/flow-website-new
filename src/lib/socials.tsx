@@ -1,5 +1,32 @@
 import React from "react";
 
+const ODYSEE_CREATURE = "M17.12 48.17a.9.9 0 00.31-1.31 1 1 0 00-1.32-.3 1 1 0 001 1.61zM73.24 23a.88.88 0 00.3-1.32 1 1 0 00-1.31-.3 1 1 0 00-.3 1.31 1 1 0 001.31.31zm11.93 36.4a1.09 1.09 0 101.32-.81 1.13 1.13 0 00-1.32.81zM69.4 96.2c-.41-.2-.81.1-1 .61a.83.83 0 101-.61zm-45.89-68a.51.51 0 10.2-1c-.3 0-.61.1-.61.4a.45.45 0 00.41.59zm3.22 50.12c-.41.1-.71.4-.61.81a.69.69 0 00.81.6c.4 0 .61-.4.61-.81a.69.69 0 00-.81-.6zM94 44l-.61 2.63L91 47.77l2.62.61 1.12 2.32.6-2.63L97.71 47l-2.63-.61zM59.29 22.39a6 6 0 00-1-1.52 1.11 1.11 0 00-1.52 0 1.09 1.09 0 000 1.52 4.6 4.6 0 01.61 1 1.18 1.18 0 001.51.51 1.15 1.15 0 00.4-1.51zm.5 4.35a1 1 0 00-.6 1.41 4.59 4.59 0 01.3 3 1.14 1.14 0 00.91 1.31h.2a1 1 0 001-.91 6.14 6.14 0 00-.4-4.24 1 1 0 00-1.41-.57zm37.87 66.4a128 128 0 00-6-18.49C89.59 69.43 82.85 63 78.5 59.8a3.16 3.16 0 01-.31-4.8C82.44 50.9 90 43 92.45 38.87c1.6-2.92 4.75-8.46 4.89-13.26.31-3.57-.18-7.7-4.91-9.59a6.9 6.9 0 00-7.14.92c-3 2.06-4 7.7-6.07 13.32-2.44 6.48-6.28 7.3-8.31 7.3s-.7-2.14-5.35-15.59c-4.65-13.45-17-11-26.29-5.44C27.44 23.6 32.69 38.67 35.63 48.38 34 50 27.74 51.21 22.08 54.24c-3.52 1.89-6.53 3.11-9.47 5.47-4.09 3.29-5.86 7-4.44 12.06a7.22 7.22 0 003.58 4.09c3.34 1.52 8.26-.69 15.79-6.35A46.19 46.19 0 0139.47 64s4.55 7 8.8 15.27c4.25 8.27-4.56 11-5.47 11s-14.8-1.35-11.62 10.38c3.18 11.73 19.92 7.48 28.51 1.82 8.59-5.66 6.47-24.16 6.47-24.16 8.39-1.31 11.02 7.58 11.84 12.13.82 4.55-1 12.44 7.48 12.64a13.28 13.28 0 003.54-.51c4.58-1.06 7.23-3.36 8.32-5.81a5.84 5.84 0 00.32-3.62zm-42.32-55c-8.59 3.24-12.74-1-13.24-8.79-.61-8.8 7.58-11 7.58-11 9.1-3 11.53 1.31 13.65 7.78 2.12 6.47.51 8.8-7.99 12.03z";
+
+function OdyseeGradient({ id }: { id: string }) {
+  return (
+    <linearGradient id={id} x1="45.6" y1="9.82" x2="88.36" y2="157.76" gradientUnits="userSpaceOnUse" gradientTransform="matrix(2.633,0,0,2.633,-20.24,-21.14)">
+      <stop offset="0" stopColor="#ef1970" />
+      <stop offset=".14" stopColor="#f23b5c" />
+      <stop offset=".45" stopColor="#f77d35" />
+      <stop offset=".7" stopColor="#fcad18" />
+      <stop offset=".89" stopColor="#fecb07" />
+      <stop offset="1" stopColor="#ffd600" />
+    </linearGradient>
+  );
+}
+
+export function OdyseeIcon({ className = "w-4 h-4", gradientId = "og" }: { className?: string; gradientId?: string }) {
+  return (
+    <svg viewBox="0 0 274 272" className={className}>
+      <defs><OdyseeGradient id={gradientId} /></defs>
+      <rect fill={`url(#${gradientId})`} x="2" y="0" width="271.31" height="271.31" rx="135.64" />
+      <g transform="matrix(2.633,0,0,2.633,-20.24,-21.14)">
+        <path fill="#fff" d={ODYSEE_CREATURE} />
+      </g>
+    </svg>
+  );
+}
+
 export const socialLinks = [
   {
     label: "YouTube",
@@ -64,5 +91,13 @@ export const socialLinks = [
     ),
     hoverColor: "hover:text-white",
     bgColor: "bg-white/10 hover:bg-white/20",
+  },
+  {
+    label: "Odysee",
+    href: "https://odysee.com/@FlowChurchServices:6",
+    icon: <OdyseeIcon className="w-4 h-4" gradientId="og-nav" />,
+    iconLg: <OdyseeIcon className="w-5 h-5" gradientId="og-footer" />,
+    hoverColor: "hover:opacity-80",
+    bgColor: "bg-gradient-to-br from-[#ef1970] via-[#f77d35] to-[#ffd600] hover:opacity-90",
   },
 ];
