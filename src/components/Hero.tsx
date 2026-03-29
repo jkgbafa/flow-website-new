@@ -13,14 +13,15 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Background video */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/flow/podium-prayer.jpg"
-          alt=""
-          fill
-          className="object-cover opacity-40"
-          priority
+        <video
+          src="/videos/hero.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-40"
         />
       </div>
 
