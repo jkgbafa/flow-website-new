@@ -3,6 +3,7 @@
 @theme inline {
   --color-accent: #E2231A;
   --color-accent-light: #FF4D45;
+  --color-accent-dark: #B91C1C;
   --font-sans: var(--font-montserrat);
 }
 
@@ -12,14 +13,35 @@ html {
 
 body {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  background: #ffffff;
-  color: #1d1d1f;
+  background: #000000;
+  color: #ffffff;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Reveal animations (subtle, Apple-like) ── */
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ── Dot texture overlay ── */
+.dot-texture {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Reveal animations ── */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -35,6 +57,25 @@ body {
 .delay-2 { transition-delay: 0.2s; }
 .delay-3 { transition-delay: 0.3s; }
 .delay-4 { transition-delay: 0.4s; }
+
+/* ── Floating blobs ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: floatSlow 8s ease-in-out infinite; }
+
+/* ── Gradient drift ── */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(12px, 12px); }
+}
+.animate-drift { animation: drift 20s ease-in-out infinite; }
 
 /* ── Live pulse ── */
 @keyframes livePulse {

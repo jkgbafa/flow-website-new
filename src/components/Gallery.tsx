@@ -12,11 +12,11 @@ interface Photo {
 
 const photos: Photo[] = [
   { src: "/images/flow/zoom-prayer.jpg", alt: "Global prayer on Zoom", label: "Global", wide: true },
-  { src: "/images/flow/prayer-is-the-work.jpg", alt: "Prayer Is The Work", label: "S12 E13", wide: false },
-  { src: "/images/flow/worship-hands.jpg", alt: "Worship", label: "S12 E14", wide: false },
-  { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", label: "S12 E15", wide: false },
-  { src: "/images/flow/singers.jpg", alt: "FLOW singers", label: "S12 E15", wide: false },
-  { src: "/images/flow/worship-team.jpg", alt: "Worship team", label: "S12 E7", wide: true },
+  { src: "/images/flow/praying-1.jpg", alt: "Bishop Dag leading prayer", label: "Prayer", wide: false },
+  { src: "/images/flow/join-flow.jpg", alt: "Join FLOW", label: "Join", wide: false },
+  { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", label: "FLOW", wide: false },
+  { src: "/images/flow/singers.jpg", alt: "FLOW singers", label: "Praise", wide: false },
+  { src: "/images/flow/worship-team.jpg", alt: "Worship team", label: "Worship", wide: true },
 ];
 
 function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
@@ -27,12 +27,7 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setVisible(true);
-          obs.unobserve(el);
-        }
-      },
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } },
       { threshold: 0.1 }
     );
     obs.observe(el);
@@ -42,7 +37,7 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
   return (
     <div ref={ref} className={photo.wide ? "col-span-1 md:col-span-2" : "col-span-1"}>
       <div
-        className="relative overflow-hidden rounded-[20px] group"
+        className="relative overflow-hidden rounded-2xl group"
         style={{
           aspectRatio: photo.wide ? "2/1" : "3/4",
           clipPath: visible ? "circle(150% at 50% 50%)" : "circle(0% at 50% 50%)",
@@ -53,10 +48,10 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
           src={photo.src}
           alt={photo.alt}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photo.wide ? "" : "object-top"}`}
           sizes={photo.wide ? "(max-width: 768px) 100vw, 80vw" : "(max-width: 768px) 50vw, 40vw"}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         <div className="absolute bottom-5 left-5 md:bottom-6 md:left-6">
           <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/70">
             {photo.label}
@@ -75,12 +70,7 @@ export default function Gallery() {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setVisible(true);
-          obs.unobserve(el);
-        }
-      },
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } },
       { threshold: 0.1 }
     );
     obs.observe(el);
@@ -88,15 +78,16 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="gallery" className="py-28 md:py-40">
-      <div className="max-w-[980px] mx-auto px-6">
-        <div ref={ref} className={`reveal ${visible ? "visible" : ""} text-center mb-14`}>
-          <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-accent mb-3">
-            Gallery
-          </p>
-          <h2 className="text-[40px] md:text-[56px] font-bold leading-[1.05] tracking-[-0.03em] text-[#1d1d1f]">
-            Moments of power.
+    <section id="gallery" className="py-32 relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
+      <div className="absolute inset-0 dot-texture" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div ref={ref} className={`reveal ${visible ? "visible" : ""} text-center mb-16`}>
+          <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
+            Moments of Power
           </h2>
+          <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
         </div>
 
         <div className="grid grid-cols-2 gap-3 md:gap-4">

@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "FLOW | There's Power Here",
   description:
     "Join millions of believers worldwide in online prophetic prayer meetings. Flexible Lovers Of The Word. Tuesdays & Fridays at 4:30 AM GMT.",
-  metadataBase: new URL("https://flow-website-kohl.vercel.app"),
   openGraph: {
     title: "FLOW | There's Power Here",
     description:
@@ -27,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable} antialiased`}>
-      <body className="bg-white text-[#1d1d1f]">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

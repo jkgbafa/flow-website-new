@@ -1,19 +1,36 @@
+"use client";
+
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Banner() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section className="relative w-full pt-12">
-      <div className="relative w-full" style={{ aspectRatio: "16/7" }}>
-        <Image
-          src="/images/flow/banner.png"
-          alt="FLOW Season 12"
-          fill
-          className="object-cover object-top"
-          sizes="100vw"
-          priority
-        />
-        {/* Fade to white at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
+    <section className="py-20 relative">
+      <div className="absolute inset-0 dot-texture" />
+      <div ref={ref} className={`reveal ${visible ? "visible" : ""} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8`}>
+        <div className="relative w-full rounded-3xl overflow-hidden border border-white/10">
+          <Image
+            src="/images/flow/banner.png"
+            alt="FLOW Season 12"
+            width={3450}
+            height={1260}
+            className="w-full h-auto"
+          />
+        </div>
       </div>
     </section>
   );
