@@ -25,7 +25,7 @@ export default function About() {
           <h2 className="text-5xl md:text-6xl font-bold text-accent">
             FLOW
           </h2>
-          <p className="text-2xl md:text-3xl text-gray-800 font-semibold mt-4">
+          <p className="text-xl text-gray-500 mt-4">
             Flexible Lovers Of The Word
           </p>
           <div className="w-24 h-1 bg-accent mx-auto mt-6" />
@@ -35,13 +35,13 @@ export default function About() {
           <div className={`reveal ${visible ? "visible" : ""} delay-1`}>
             <div className="space-y-5 text-gray-600 text-lg leading-relaxed">
               <p>
-                FLOW is an online prophetic prayer meeting founded by Bishop Dag Heward-Mills that brings together millions of believers from around the world.
+                FLOW is a prophetic online prayer meeting led by Dag Heward-Mills, bringing together believers from around the world.
               </p>
               <p>
                 Every Tuesday and Friday at 4:30 AM GMT, and every Sunday at 9:00 AM GMT, people from every nation gather to pray, worship, and experience the move of God through prophetic prayer.
               </p>
               <p>
-                FLOW stands for <strong className="text-gray-800">Flexible Lovers Of The Word</strong> — a community rooted deeply in Scripture and the power of prayer. When we pray, heaven moves and God responds to the cry of His people.
+                When we pray, heaven moves and God responds to the cry of His people.
               </p>
             </div>
           </div>
@@ -50,8 +50,8 @@ export default function About() {
             <div className="relative rounded-2xl overflow-hidden group">
               <div style={{ aspectRatio: "4/5" }} className="relative">
                 <Image
-                  src="/images/flow/prayer-desk-new.jpg"
-                  alt="FLOW Prayer"
+                  src="/images/flow/survivors.jpg"
+                  alt="People who pray are survivors"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"

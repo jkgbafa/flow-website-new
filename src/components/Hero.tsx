@@ -61,30 +61,21 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* CTAs */}
+        {/* CTA */}
         <div
-          className={`mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-300 ${
+          className={`mt-10 transition-all duration-1000 delay-300 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           <a
-            href="https://www.youtube.com/@TheresPowerHere"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative px-8 py-4 rounded-xl overflow-hidden"
+            href="#connect"
+            className="inline-block group relative px-8 py-4 rounded-xl overflow-hidden"
           >
             <div className="absolute inset-0 glass-strong" />
             <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative text-[14px] font-semibold text-white tracking-wide">
-              JOIN PRAYER MEETING
+              WATCH ONLINE
             </span>
-          </a>
-
-          <a
-            href="#connect"
-            className="px-8 py-4 rounded-xl border border-white/20 text-[14px] font-semibold text-white/80 hover:text-white hover:border-white/40 transition-all tracking-wide"
-          >
-            WATCH ONLINE
           </a>
         </div>
       </div>

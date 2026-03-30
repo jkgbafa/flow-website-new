@@ -12,7 +12,7 @@ interface Photo {
 
 const photos: Photo[] = [
   { src: "/images/flow/zoom-prayer.jpg", alt: "Global prayer on Zoom", label: "Global", wide: true },
-  { src: "/images/flow/praying-1.jpg", alt: "Bishop Dag leading prayer", label: "Prayer", wide: false },
+  { src: "/images/flow/praying-1.jpg", alt: "Dag Heward-Mills leading prayer", label: "Prayer", wide: false },
   { src: "/images/flow/join-flow.jpg", alt: "Join FLOW", label: "Join", wide: false },
   { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", label: "FLOW", wide: false },
   { src: "/images/flow/singers.jpg", alt: "FLOW singers", label: "Praise", wide: false },

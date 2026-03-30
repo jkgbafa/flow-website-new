@@ -6,7 +6,7 @@ import { socialLinks, OdyseeIcon } from "@/lib/socials";
 const platforms = [
   {
     name: "Odysee",
-    handle: "FLOW Church Services",
+    handle: "FLOW Prayer Meetings",
     description: "Watch every FLOW Prayer Meeting from 2020 to now — full archive of prophetic prayer.",
     href: "https://odysee.com/@FlowChurchServices:6",
     color: "bg-[#E4457B]/10",
@@ -15,7 +15,7 @@ const platforms = [
   },
   {
     name: "YouTube",
-    handle: "The FLOW Church",
+    handle: "There's Power Here",
     description: "Watch live prayer meetings, worship, and the latest FLOW episodes.",
     href: "https://www.youtube.com/@TheresPowerHere",
     color: "bg-red-500/10",
@@ -55,7 +55,7 @@ export default function StayConnected() {
           </h2>
           <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
           <p className="text-xl text-white/50 mt-6 max-w-lg mx-auto leading-relaxed">
-            Stay connected with The FLOW Church across all platforms.
+            Stay connected with FLOW across all platforms.
           </p>
         </div>
 
