@@ -56,7 +56,7 @@ export default function Merch() {
           className={`reveal ${visible ? "visible" : ""} text-center mb-16`}
         >
           <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
-            Rep FLOW
+            FLOW Merch
           </h2>
           <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
           <p className="text-xl text-white/50 mt-6 max-w-lg mx-auto leading-relaxed">

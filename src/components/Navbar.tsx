@@ -10,7 +10,7 @@ const navLinks = [
   { label: "WATCH", href: "#connect" },
   { label: "GIVE", href: "#give" },
   { label: "CARE", href: "#pastoral-care" },
-  { label: "REP", href: "#merch" },
+  { label: "MERCH", href: "#merch" },
   { label: "RECAPS", href: "#blog" },
   { label: "CONNECT", href: "#stay-connected" },
 ];
