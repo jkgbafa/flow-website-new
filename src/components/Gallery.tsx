@@ -6,17 +6,16 @@ import Image from "next/image";
 interface Photo {
   src: string;
   alt: string;
-  label: string;
   wide: boolean;
 }
 
 const photos: Photo[] = [
-  { src: "/images/flow/zoom-prayer.jpg", alt: "Global prayer on Zoom", label: "Global", wide: true },
-  { src: "/images/flow/praying-1.jpg", alt: "Dag Heward-Mills leading prayer", label: "Prayer", wide: false },
-  { src: "/images/flow/join-flow.jpg", alt: "Join FLOW", label: "Join", wide: false },
-  { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", label: "FLOW", wide: false },
-  { src: "/images/flow/singers.jpg", alt: "FLOW singers", label: "Praise", wide: false },
-  { src: "/images/flow/worship-team.jpg", alt: "Worship team", label: "Worship", wide: true },
+  { src: "/images/flow/zoom-prayer.jpg", alt: "Global prayer on Zoom", wide: true },
+  { src: "/images/flow/praying-1.jpg", alt: "Dag Heward-Mills leading prayer", wide: false },
+  { src: "/images/flow/join-flow.jpg", alt: "Join FLOW", wide: false },
+  { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", wide: false },
+  { src: "/images/flow/singers.jpg", alt: "FLOW singers", wide: false },
+  { src: "/images/flow/worship-team.jpg", alt: "Worship team", wide: true },
 ];
 
 function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
@@ -51,12 +50,7 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
           className={`object-cover transition-transform duration-700 group-hover:scale-105 ${photo.wide ? "" : "object-top"}`}
           sizes={photo.wide ? "(max-width: 768px) 100vw, 80vw" : "(max-width: 768px) 50vw, 40vw"}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-        <div className="absolute bottom-5 left-5 md:bottom-6 md:left-6">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/70">
-            {photo.label}
-          </span>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
       </div>
     </div>
   );
