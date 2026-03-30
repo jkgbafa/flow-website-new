@@ -106,13 +106,14 @@ function Countdown() {
     const days = Math.floor(totalSec / 86400);
     const hours = Math.floor((totalSec % 86400) / 3600);
     const minutes = Math.floor((totalSec % 3600) / 60);
-    return { days, hours, minutes, label: next.label };
+    const seconds = totalSec % 60;
+    return { days, hours, minutes, seconds, label: next.label };
   }, []);
 
   const [time, setTime] = useState(calc);
 
   useEffect(() => {
-    const id = setInterval(() => setTime(calc()), 60_000);
+    const id = setInterval(() => setTime(calc()), 1_000);
     return () => clearInterval(id);
   }, [calc]);
 
@@ -126,6 +127,7 @@ function Countdown() {
           { value: time.days, unit: "Days" },
           { value: time.hours, unit: "Hours" },
           { value: time.minutes, unit: "Min" },
+          { value: time.seconds, unit: "Sec" },
         ].map((t) => (
           <div key={t.unit} className="text-center">
             <span className="text-5xl sm:text-6xl font-bold text-white tabular-nums">
