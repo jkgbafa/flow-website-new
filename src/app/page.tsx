@@ -12,7 +12,7 @@ import PastoralCare from "@/components/PastoralCare";
 import Testimony from "@/components/Testimony";
 import StayConnected from "@/components/StayConnected";
 import Footer from "@/components/Footer";
-import ChatWidget from "@/components/ChatWidget";
+// import ChatWidget from "@/components/ChatWidget";
 
 export default function Home() {
   return (
@@ -33,7 +33,7 @@ export default function Home() {
         <Blog />
       </main>
       <Footer />
-      <ChatWidget />
+      {/* <ChatWidget /> */}
     </>
   );
 }
