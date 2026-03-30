@@ -11,6 +11,7 @@ import ShareLink from "@/components/ShareLink";
 import PastoralCare from "@/components/PastoralCare";
 import Testimony from "@/components/Testimony";
 import StayConnected from "@/components/StayConnected";
+import Merch from "@/components/Merch";
 import Footer from "@/components/Footer";
 // import ChatWidget from "@/components/ChatWidget";
 
@@ -29,6 +30,7 @@ export default function Home() {
         <PastoralCare />
         <Testimony />
         <StayConnected />
+        <Merch />
         <Gallery />
         <Blog />
       </main>
