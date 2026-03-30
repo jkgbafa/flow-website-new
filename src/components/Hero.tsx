@@ -68,7 +68,9 @@ export default function Hero() {
           }`}
         >
           <a
-            href="#connect"
+            href="https://www.youtube.com/@TheresPowerHere"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block group relative px-8 py-4 rounded-xl overflow-hidden"
           >
             <div className="absolute inset-0 glass-strong" />
