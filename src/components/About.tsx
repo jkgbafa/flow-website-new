@@ -38,10 +38,13 @@ export default function About() {
                 FLOW is a prophetic online prayer meeting led by Dag Heward-Mills, bringing together believers from around the world.
               </p>
               <p>
-                Every Tuesday and Friday at 4:30 AM GMT, and every Sunday at 9:00 AM GMT, people from every nation gather to pray, worship, and experience the move of God through prophetic prayer.
+                Every Tuesday and Friday at 4:30 AM GMT, and every Sunday at 9:00 AM GMT, people from every nation gather to pray and experience the move of God through prophetic prayer.
               </p>
               <p>
-                When we pray, heaven moves and God responds to the cry of His people.
+                Prayer changes things! You will be glad you prayed.
+              </p>
+              <p className="italic text-gray-500">
+                &ldquo;Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God.&rdquo; — Philippians 4:6
               </p>
             </div>
           </div>
