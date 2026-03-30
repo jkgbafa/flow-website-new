@@ -79,13 +79,15 @@ function BlogCard({ post, index }: { post: (typeof blogPosts)[0]; index: number 
               {post.episode}
             </span>
           </div>
+          <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+            <h3 className="text-[15px] md:text-[17px] font-semibold text-white leading-[1.35] group-hover:text-accent transition-colors">
+              {post.title}
+            </h3>
+          </div>
         </div>
 
         <div className="p-6 md:p-7">
           <p className="text-[12px] text-white/40 mb-2">{post.date}</p>
-          <h3 className="text-[15px] md:text-[17px] font-semibold text-white leading-[1.35] mb-3 group-hover:text-accent transition-colors">
-            {post.title}
-          </h3>
           <p className="mt-4 text-[14px] text-accent font-medium">
             Read on Facebook &rsaquo;
           </p>
