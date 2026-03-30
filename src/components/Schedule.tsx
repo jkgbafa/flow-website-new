@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
 interface TimeZone {
@@ -27,11 +27,12 @@ const events: Event[] = [
     tz: "GMT",
     image: "/images/flow/podium-prayer.jpg",
     zones: [
-      { country: "Ghana", flag: "🇬🇭", time: "4:30 AM", tz: "GMT" },
-      { country: "Nigeria", flag: "🇳🇬", time: "5:30 AM", tz: "WAT" },
-      { country: "USA", flag: "🇺🇸", time: "11:30 PM", tz: "EST" },
-      { country: "South Africa", flag: "🇿🇦", time: "6:30 AM", tz: "SAST" },
-      { country: "Australia", flag: "🇦🇺", time: "2:00 PM", tz: "ACST" },
+      { country: "Ghana", flag: "\u{1F1EC}\u{1F1ED}", time: "4:30 AM", tz: "GMT" },
+      { country: "UK", flag: "\u{1F1EC}\u{1F1E7}", time: "5:30 AM", tz: "BST" },
+      { country: "Nigeria", flag: "\u{1F1F3}\u{1F1EC}", time: "5:30 AM", tz: "WAT" },
+      { country: "USA", flag: "\u{1F1FA}\u{1F1F8}", time: "11:30 PM", tz: "EST" },
+      { country: "South Africa", flag: "\u{1F1FF}\u{1F1E6}", time: "6:30 AM", tz: "SAST" },
+      { country: "Australia", flag: "\u{1F1E6}\u{1F1FA}", time: "2:00 PM", tz: "ACST" },
     ],
   },
   {
@@ -41,11 +42,12 @@ const events: Event[] = [
     tz: "GMT",
     image: "/images/flow/join-flow.jpg",
     zones: [
-      { country: "Ghana", flag: "🇬🇭", time: "4:30 AM", tz: "GMT" },
-      { country: "Nigeria", flag: "🇳🇬", time: "5:30 AM", tz: "WAT" },
-      { country: "USA", flag: "🇺🇸", time: "11:30 PM", tz: "EST" },
-      { country: "South Africa", flag: "🇿🇦", time: "6:30 AM", tz: "SAST" },
-      { country: "Australia", flag: "🇦🇺", time: "2:00 PM", tz: "ACST" },
+      { country: "Ghana", flag: "\u{1F1EC}\u{1F1ED}", time: "4:30 AM", tz: "GMT" },
+      { country: "UK", flag: "\u{1F1EC}\u{1F1E7}", time: "5:30 AM", tz: "BST" },
+      { country: "Nigeria", flag: "\u{1F1F3}\u{1F1EC}", time: "5:30 AM", tz: "WAT" },
+      { country: "USA", flag: "\u{1F1FA}\u{1F1F8}", time: "11:30 PM", tz: "EST" },
+      { country: "South Africa", flag: "\u{1F1FF}\u{1F1E6}", time: "6:30 AM", tz: "SAST" },
+      { country: "Australia", flag: "\u{1F1E6}\u{1F1FA}", time: "2:00 PM", tz: "ACST" },
     ],
   },
   {
@@ -55,14 +57,89 @@ const events: Event[] = [
     tz: "GMT",
     image: "/images/flow/flow-shirt.jpg",
     zones: [
-      { country: "Ghana", flag: "🇬🇭", time: "9:00 AM", tz: "GMT" },
-      { country: "Nigeria", flag: "🇳🇬", time: "10:00 AM", tz: "WAT" },
-      { country: "USA", flag: "🇺🇸", time: "4:00 AM", tz: "EST" },
-      { country: "South Africa", flag: "🇿🇦", time: "11:00 AM", tz: "SAST" },
-      { country: "Australia", flag: "🇦🇺", time: "6:30 PM", tz: "ACST" },
+      { country: "Ghana", flag: "\u{1F1EC}\u{1F1ED}", time: "9:00 AM", tz: "GMT" },
+      { country: "UK", flag: "\u{1F1EC}\u{1F1E7}", time: "10:00 AM", tz: "BST" },
+      { country: "Nigeria", flag: "\u{1F1F3}\u{1F1EC}", time: "10:00 AM", tz: "WAT" },
+      { country: "USA", flag: "\u{1F1FA}\u{1F1F8}", time: "4:00 AM", tz: "EST" },
+      { country: "South Africa", flag: "\u{1F1FF}\u{1F1E6}", time: "11:00 AM", tz: "SAST" },
+      { country: "Australia", flag: "\u{1F1E6}\u{1F1FA}", time: "6:30 PM", tz: "ACST" },
     ],
   },
 ];
+
+// Meeting times in UTC: [dayOfWeek (0=Sun), hour, minute]
+const MEETINGS: [number, number, number][] = [
+  [0, 9, 0],   // Sunday 9:00 AM GMT
+  [2, 4, 30],  // Tuesday 4:30 AM GMT
+  [5, 4, 30],  // Friday 4:30 AM GMT
+];
+
+function getNextMeeting() {
+  const now = new Date();
+  let closest: { ms: number; label: string } | null = null;
+
+  for (const [dow, h, m] of MEETINGS) {
+    // Try this week and next week
+    for (let weekOffset = 0; weekOffset <= 1; weekOffset++) {
+      const target = new Date(now);
+      const currentDow = target.getUTCDay();
+      let daysAhead = dow - currentDow;
+      if (daysAhead < 0) daysAhead += 7;
+      daysAhead += weekOffset * 7;
+      target.setUTCDate(target.getUTCDate() + daysAhead);
+      target.setUTCHours(h, m, 0, 0);
+
+      const diff = target.getTime() - now.getTime();
+      if (diff > 0 && (!closest || diff < closest.ms)) {
+        const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dow];
+        closest = { ms: diff, label: dayName };
+      }
+    }
+  }
+  return closest!;
+}
+
+function Countdown() {
+  const calc = useCallback(() => {
+    const next = getNextMeeting();
+    const totalSec = Math.floor(next.ms / 1000);
+    const days = Math.floor(totalSec / 86400);
+    const hours = Math.floor((totalSec % 86400) / 3600);
+    const minutes = Math.floor((totalSec % 3600) / 60);
+    return { days, hours, minutes, label: next.label };
+  }, []);
+
+  const [time, setTime] = useState(calc);
+
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 60_000);
+    return () => clearInterval(id);
+  }, [calc]);
+
+  return (
+    <div className="text-center mb-16">
+      <p className="text-accent text-[11px] font-semibold tracking-[0.15em] uppercase mb-4">
+        Next FLOW Meeting — {time.label}
+      </p>
+      <div className="flex justify-center gap-6 sm:gap-10">
+        {[
+          { value: time.days, unit: "Days" },
+          { value: time.hours, unit: "Hours" },
+          { value: time.minutes, unit: "Min" },
+        ].map((t) => (
+          <div key={t.unit} className="text-center">
+            <span className="text-5xl sm:text-6xl font-bold text-white tabular-nums">
+              {String(t.value).padStart(2, "0")}
+            </span>
+            <p className="text-[11px] text-white/40 uppercase tracking-wider mt-2 font-medium">
+              {t.unit}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function EventCard({ event, index }: { event: Event; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -180,10 +257,9 @@ export default function Schedule() {
             Weekly Schedule
           </h2>
           <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
-          <p className="text-xl text-white/60 mt-6 max-w-lg mx-auto">
-            Join us for prayer meetings throughout the week
-          </p>
         </div>
+
+        <Countdown />
 
         <div className="grid md:grid-cols-3 gap-6">
           {events.map((event, i) => (
