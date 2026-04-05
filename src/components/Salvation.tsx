@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 
-export default function Testimony() {
+export default function Salvation() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -18,26 +18,34 @@ export default function Testimony() {
   }, []);
 
   return (
-    <section id="testimonies" className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0,0,0),rgb(30,0,0),rgb(0,0,0))]" />
+    <section id="salvation" className="py-32 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(0,0,0),rgb(41,0,0),rgb(0,0,0))]" />
       <div className="absolute inset-0 dot-texture" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-3xl" />
 
       <div ref={ref} className="relative max-w-3xl mx-auto px-4 text-center">
         <div className={`reveal ${visible ? "visible" : ""}`}>
+          <div className="mx-auto w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mb-8">
+            <svg className="w-10 h-10 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
           <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
-            Send Us Your<br />Testimony
+            Did You Give Your<br />Life to Christ?
           </h2>
           <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
           <p className="text-xl text-white/50 mt-6 max-w-lg mx-auto leading-relaxed">
-            Has God moved in your life through the FLOW Prayer Meeting? We want to hear from you.
+            If you made a decision to accept Jesus Christ as your Lord and Saviour during a FLOW Prayer Meeting, we would love to hear from you and help you on this journey.
+          </p>
+          <p className="text-lg text-white/40 mt-4 max-w-lg mx-auto leading-relaxed">
+            Let us know so we can connect you with resources, prayer, and a community of believers to support your walk with God.
           </p>
         </div>
 
         <div className={`reveal ${visible ? "visible" : ""} delay-2 mt-12 grid sm:grid-cols-2 gap-5 max-w-xl mx-auto`}>
           {/* WhatsApp */}
           <a
-            href="https://wa.me/233550669630?text=Hello%2C%20I%20want%20to%20share%20my%20testimony%20from%20FLOW%20Prayer%20Meeting"
+            href="https://wa.me/233550669630?text=Hello%2C%20I%20gave%20my%20life%20to%20Christ%20during%20a%20FLOW%20Prayer%20Meeting"
             target="_blank"
             rel="noopener noreferrer"
             className="group glass rounded-2xl p-6 hover:border-white/20 transition-colors text-center"
@@ -53,7 +61,7 @@ export default function Testimony() {
 
           {/* Email */}
           <a
-            href="mailto:connect@theflowchurch.online?subject=Testimony%20from%20FLOW%20Prayer%20Meeting"
+            href="mailto:connect@theflowchurch.online?subject=I%20Gave%20My%20Life%20to%20Christ%20at%20FLOW"
             className="group glass rounded-2xl p-6 hover:border-white/20 transition-colors text-center"
           >
             <div className="mx-auto w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">

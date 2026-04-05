@@ -8,6 +8,9 @@ export default function Connect() {
   const [visible, setVisible] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [latestVideoId, setLatestVideoId] = useState("");
+  const [thumbFailed, setThumbFailed] = useState(false);
+
+  const CHANNEL_URL = "https://www.youtube.com/@TheresPowerHere";
 
   useEffect(() => {
     fetch("/api/youtube-feed")
@@ -46,20 +49,18 @@ export default function Connect() {
             <p className="text-xl text-white/60 mt-6 leading-relaxed">
               Your all access pass to the latest FLOW Prayer Meetings. Watch the most recent episode and experience the power of prayer.
             </p>
-            {latestVideoId && (
-              <a
-                href={`https://www.youtube.com/watch?v=${latestVideoId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-8 group relative px-8 py-4 rounded-2xl overflow-hidden"
-              >
-                <div className="absolute inset-0 glass-strong" />
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative text-[14px] font-semibold text-white tracking-wide">
-                  WATCH NOW
-                </span>
-              </a>
-            )}
+            <a
+              href={latestVideoId ? `https://www.youtube.com/watch?v=${latestVideoId}` : CHANNEL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-8 group relative px-8 py-4 rounded-2xl overflow-hidden"
+            >
+              <div className="absolute inset-0 glass-strong" />
+              <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative text-[14px] font-semibold text-white tracking-wide">
+                WATCH NOW
+              </span>
+            </a>
           </div>
 
           {/* Video */}
@@ -84,14 +85,23 @@ export default function Connect() {
                   />
                 ) : (
                   <>
-                    {latestVideoId && (
+                    {latestVideoId && !thumbFailed ? (
                       <Image
-                        src={`https://img.youtube.com/vi/${latestVideoId}/maxresdefault.jpg`}
+                        src={`https://img.youtube.com/vi/${latestVideoId}/hqdefault.jpg`}
                         alt="FLOW Prayer Meeting"
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 600px"
                         unoptimized
+                        onError={() => setThumbFailed(true)}
+                      />
+                    ) : (
+                      <Image
+                        src="/images/flow/praying-1.jpg"
+                        alt="FLOW Prayer Meeting"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 600px"
                       />
                     )}
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />

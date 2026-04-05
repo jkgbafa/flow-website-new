@@ -100,6 +100,9 @@ export default function Footer() {
                   { label: "Watch", href: "#connect" },
                   { label: "Give", href: "#give" },
                   { label: "Pastoral Care", href: "#pastoral-care" },
+                  { label: "Testimonies", href: "#testimonies" },
+                  { label: "Merch", href: "#merch" },
+                  { label: "Recaps", href: "#blog" },
                   { label: "Stay Connected", href: "#stay-connected" },
                 ].map((link) => (
                   <a
@@ -152,7 +155,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-[12px] text-white/20">
-              &copy; {new Date().getFullYear()} FLOW — There&apos;s Power Here
+              &copy; {new Date().getFullYear()}{" "}FLOW &mdash; There&apos;s Power Here
             </p>
           </div>
         </div>

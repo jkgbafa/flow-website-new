@@ -8,7 +8,7 @@ const methods = [
     icon: "🌍",
     details: [
       { label: "Website", value: "flowoffering.com", link: "https://flowoffering.com" },
-      { label: "MTN MoMo", value: "053 042 9589" },
+      { label: "MTN MoMo", value: "+233 53 042 9589" },
     ],
   },
   {
@@ -35,7 +35,7 @@ const methods = [
     details: [
       { label: "Account Name", value: "First Love Church (Switzerland)" },
       { label: "IBAN", value: "CH2900231231168902400W" },
-      { label: "Address", value: "Biegstrasse 7, 8304 Wallisellen" },
+      { label: "Address", value: "Birgistrasse 7, 8304 Wallisellen" },
     ],
   },
   {

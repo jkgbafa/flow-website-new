@@ -83,9 +83,9 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-[11px] text-white/30 tracking-[0.1em] uppercase">Scroll Down</span>
-        <svg className="w-4 h-4 text-white/30 scroll-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="absolute bottom-12 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+        <span className="text-[12px] text-white/80 tracking-[0.15em] uppercase font-medium drop-shadow-lg">Scroll Down</span>
+        <svg className="w-5 h-5 text-white/80 scroll-bounce drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7" />
         </svg>
       </div>

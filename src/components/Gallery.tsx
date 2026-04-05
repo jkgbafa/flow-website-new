@@ -34,7 +34,7 @@ function GalleryItem({ photo, index }: { photo: Photo; index: number }) {
   }, []);
 
   return (
-    <div ref={ref} className={photo.wide ? "col-span-1 md:col-span-2" : "col-span-1"}>
+    <div ref={ref} className={photo.wide ? "col-span-2" : "col-span-1"}>
       <div
         className="relative overflow-hidden rounded-2xl group"
         style={{

@@ -26,8 +26,8 @@ export default function Banner() {
           <Image
             src="/images/flow/banner.png"
             alt="FLOW Season 12"
-            width={3450}
-            height={1260}
+            width={3120}
+            height={1160}
             className="w-full h-auto"
           />
         </div>
