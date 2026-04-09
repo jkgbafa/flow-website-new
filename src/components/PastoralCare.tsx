@@ -51,7 +51,7 @@ export default function PastoralCare() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={ref} className={`reveal ${visible ? "visible" : ""} text-center mb-16`}>
           <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
-            Pastoral Care
+            Meetings of the Spirit
           </h2>
           <div className="mx-auto mt-6 h-1 w-48 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full" />
           <p className="text-xl text-white/50 mt-6 max-w-lg mx-auto leading-relaxed">
@@ -91,7 +91,7 @@ export default function PastoralCare() {
             <div className="absolute inset-0 glass-strong" />
             <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative text-[15px] font-semibold text-white tracking-wide">
-              REGISTER FOR PASTORAL CARE
+              REGISTER FOR MEETINGS
             </span>
           </a>
         </div>

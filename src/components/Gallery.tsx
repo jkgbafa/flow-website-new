@@ -15,7 +15,7 @@ const photos: Photo[] = [
   { src: "/images/flow/join-flow.jpg", alt: "Join FLOW", wide: false },
   { src: "/images/flow/flow-shirt.jpg", alt: "Flexible Lovers Of The Word", wide: false },
   { src: "/images/flow/singers.jpg", alt: "FLOW singers", wide: false },
-  { src: "/images/flow/worship-team.jpg", alt: "Worship team", wide: true },
+  { src: "/images/flow/land.jpg", alt: "FLOW Prayer Meeting", wide: true },
 ];
 
 function GalleryItem({ photo, index }: { photo: Photo; index: number }) {

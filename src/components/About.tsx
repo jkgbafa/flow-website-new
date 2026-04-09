@@ -43,9 +43,22 @@ export default function About() {
               <p>
                 Prayer changes things! You will be glad you prayed.
               </p>
+              <p>
+                FLOW is led by Bishop Dag Heward-Mills, founder of the United Denominations Originating from the Lighthouse Group of Churches (UD-OLGC) and author of numerous books. Through FLOW, he brings believers together from around the world to experience the power of God through prophetic prayer.
+              </p>
               <p className="italic text-gray-500">
                 &ldquo;Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God.&rdquo; — Philippians 4:6
               </p>
+              <div className="mt-8">
+                <a
+                  href="https://daghewardmills.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-4 bg-accent text-white font-semibold text-[14px] tracking-wide rounded-xl hover:bg-accent-light transition-colors"
+                >
+                  VISIT DAGHEWARDMILLS.ORG
+                </a>
+              </div>
             </div>
           </div>
 

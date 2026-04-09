@@ -31,11 +31,11 @@ export default function Footer() {
         <div ref={ref} className="relative max-w-3xl mx-auto px-4 text-center">
           <div className={`reveal ${visible ? "visible" : ""}`}>
             <h2 className="text-7xl md:text-8xl font-bold text-white tracking-tight">
-              There&apos;s Power<br />In Prayer
+              There&apos;s Power<br />In Prophetic Prayers
             </h2>
             <div className="mx-auto mt-8 h-1 w-48 md:w-64 bg-gradient-to-r from-accent via-accent-light to-accent rounded-full animate-drift" />
             <p className="text-xl text-white/50 mt-8 max-w-lg mx-auto leading-relaxed">
-              Join believers from around the world. Experience the move of God through prophetic prayer.
+              Join believers from around the world. Experience the move of God through prophetic prayers.
             </p>
             <div className="mt-10">
               <a
@@ -99,10 +99,10 @@ export default function Footer() {
                   { label: "Schedule", href: "#schedule" },
                   { label: "Watch", href: "#connect" },
                   { label: "Give", href: "#give" },
-                  { label: "Pastoral Care", href: "#pastoral-care" },
+                  { label: "Meetings of the Spirit", href: "#pastoral-care" },
                   { label: "Testimonies", href: "#testimonies" },
                   { label: "Merch", href: "#merch" },
-                  { label: "Recaps", href: "#blog" },
+                  { label: "FLOW Blogs", href: "#blog" },
                   { label: "Stay Connected", href: "#stay-connected" },
                 ].map((link) => (
                   <a
