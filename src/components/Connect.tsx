@@ -6,20 +6,7 @@ import Image from "next/image";
 export default function Connect() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [latestVideoId, setLatestVideoId] = useState("");
-  const [thumbFailed, setThumbFailed] = useState(false);
-
   const CHANNEL_URL = "https://www.youtube.com/@TheresPowerHere";
-
-  useEffect(() => {
-    fetch("/api/youtube-feed")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.latestVideoId) setLatestVideoId(data.latestVideoId);
-      })
-      .catch(() => {});
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -50,7 +37,7 @@ export default function Connect() {
               Your all access pass to the latest FLOW Prayer Meetings. Watch the most recent episode and experience the power of prayer.
             </p>
             <a
-              href={latestVideoId ? `https://www.youtube.com/watch?v=${latestVideoId}` : CHANNEL_URL}
+              href={CHANNEL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-8 group relative px-8 py-4 rounded-2xl overflow-hidden"
@@ -70,54 +57,31 @@ export default function Connect() {
               <div className="absolute -top-8 -right-8 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
               <div className="absolute -bottom-8 -left-8 w-36 h-36 bg-red-800/20 rounded-full blur-3xl" />
 
-              <div
-                className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10"
+              <a
+                href={CHANNEL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative block rounded-2xl overflow-hidden cursor-pointer group border border-white/10"
                 style={{ aspectRatio: "16/9" }}
-                onClick={() => setPlaying(true)}
               >
-                {playing && latestVideoId ? (
-                  <iframe
-                    src={`https://www.youtube.com/embed/${latestVideoId}?autoplay=1&mute=1&start=30&rel=0`}
-                    className="absolute inset-0 w-full h-full"
-                    allow="autoplay; encrypted-media; fullscreen"
-                    allowFullScreen
-                    title="Latest FLOW Prayer Meeting"
-                  />
-                ) : (
-                  <>
-                    {latestVideoId && !thumbFailed ? (
-                      <Image
-                        src={`https://img.youtube.com/vi/${latestVideoId}/hqdefault.jpg`}
-                        alt="FLOW Prayer Meeting"
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 600px"
-                        unoptimized
-                        onError={() => setThumbFailed(true)}
-                      />
-                    ) : (
-                      <Image
-                        src="/images/flow/praying-1.jpg"
-                        alt="FLOW Prayer Meeting"
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 600px"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+                <Image
+                  src="/images/flow/praying-1.jpg"
+                  alt="FLOW Prayer Meeting"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 600px"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
 
-                    {/* Play button */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-accent/30">
-                        <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-
-                  </>
-                )}
-              </div>
+                {/* Play button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-accent/30">
+                    <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
